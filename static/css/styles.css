@@ -43,6 +43,7 @@ body {
     color: white;
     font-family: 'Roboto', sans-serif;
     padding-bottom: 70px;
+    padding-top: 60px;
 }
 
 h1,h3 {
@@ -332,4 +333,79 @@ th {
 .blue {
     background-color: #002b7a;
     color: white;
+}
+
+.pdf-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 90vw;
+    margin: 50px auto;
+}
+
+.pdf-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 90vw;       /* almost full screen width */
+    margin: 50px auto; /* spacing from top/bottom */
+}
+
+.pdf-card {
+    flex: 1 1 calc(33% - 20px); /* 3 cards per row with gap */
+    background-color: #111;
+    border: 2px solid #FF6E00;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    min-width: 250px;  /* ensures it doesn’t shrink too much on small screens */
+}
+
+.pdf-card a {
+    color: #FF6E00;     /* Swartdog orange */
+    text-decoration: none;  /* removes underline */
+    font-weight: bold;
+}
+
+.pdf-card a:hover {
+    color: #ff8c1a;     /* slightly lighter on hover */
+    text-decoration: underline; /* optional, for hover effect */
+}
+
+/* =========================
+   TOP NAV BAR
+========================= */
+.top-nav {
+    width: 100%;
+    background-color: #000; /* black background */
+    border-bottom: 2px solid #FF6E00; /* Swartdog orange underline */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start; /* left align nav links */
+    gap: 20px;
+    padding: 10px 20px;
+}
+
+.nav-container a {
+    color: #FF6E00;           /* Swartdog orange text */
+    text-decoration: none;
+    font-family: 'Bolt', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.nav-container a:hover {
+    color: #ff8c1a; /* lighter orange hover */
+    text-decoration: underline;
 }
