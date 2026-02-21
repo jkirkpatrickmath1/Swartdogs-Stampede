@@ -1,0 +1,335 @@
+/* =========================
+   FONTS
+========================= */
+
+@font-face {
+    font-family: 'Bolt';
+    src: url('/static/fonts/Bolt.ttf') format('truetype');
+}
+
+
+/* Logo banner on top */
+.logo-banner img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;  /* spacing below logo */
+    display: block;
+}
+/* Small logo next to match title */
+.match-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;       /* space between logo and title */
+    margin-bottom: 20px;
+}
+
+.match-header .small-logo {
+    height: 60px;       /* set exact height */
+    width: auto;        /* keep aspect ratio */
+    max-width: 150px;   /* prevent horizontal blowout */
+    object-fit: contain; /* ensures it fits nicely */
+}
+
+.ticker-logo {
+    height: 30px;
+    margin-right: 10px;
+}
+
+
+body {
+    margin: 0;
+    background-color: #000;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding-bottom: 70px;
+}
+
+h1,h3 {
+    font-family: 'Bolt', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+
+
+}
+/* Headings must be Bolt + ALL CAPS */
+h2, h4 {
+    font-family: 'Bolt', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* Timer + technical UI */
+#timer {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 72px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Remove rounded corners globally */
+* {
+    border-radius: 0 !important;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 8px;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 2px solid transparent;
+}
+
+/* Universal Start = Green */
+#startButton {
+    background-color: #2ecc71;
+    color: #000;
+}
+
+/* Pause = Red */
+#pauseButton {
+    background-color: #e74c3c;
+    color: #fff;
+    display: none;
+}
+
+/* Replay = Swartdog Orange */
+#replayButton {
+    background-color: #FF6E00;
+    color: #000;
+    display: none;
+}
+
+/* =========================
+   ALLIANCE BLOCKS
+========================= */
+
+.alliance {
+    width: 45%;
+    padding: 20px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.5);
+}
+
+.red {
+    background-color: #7a0000;
+    color: white;
+}
+
+.blue {
+    background-color: #002b7a;
+    color: white;
+}
+
+.alliance h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.teams {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* =========================
+   FORM
+========================= */
+
+form {
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+/* Only hide forms on match page */
+.match-form {
+    display: none;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.inputs input {
+    width: 60px;
+    padding: 4px;
+    font-size: 16px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.controls {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/* Submit Button — Front Page / Generate Schedule */
+.submit-btn button {
+    background-color: #FF6E00;  /* Swartdog Orange */
+    color: #000;                 /* Black text for contrast */
+    font-size: 20px;
+    font-family: 'Bolt', sans-serif; /* optional: make heading-style bold */
+    text-transform: uppercase;       /* consistent with brand */
+    padding: 14px 40px;              /* slightly bigger click area */
+    border: 2px solid #000;          /* optional: adds sharp edge */
+    cursor: pointer;
+}
+
+.submit-btn button:hover {
+    background-color: #ff8c1a;      /* lighter orange hover effect */
+}
+
+/* =========================
+   TICKER
+========================= */
+
+#bottomTicker {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111;
+    color: white;
+    overflow: hidden;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+#tickerContent {
+    white-space: nowrap;
+    display: inline-block;
+    animation: scrollTicker 25s linear infinite;
+    padding-left: 100%;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.ticker-item {
+    margin-right: 60px;
+    font-weight: bold;
+}
+
+.ticker-red { color: #ff4d4d; }
+.ticker-blue { color: #4da6ff; }
+
+@keyframes scrollTicker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+/* =========================
+   GLOBAL LAYOUT
+========================= */
+
+.page-center {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-card {
+    background-color: #111;
+    padding: 50px;
+    width: 500px;
+    border: 2px solid #FF6E00;
+    text-align: center;
+    color: white;
+    max-width: 600px;       /* prevents textarea/button from stretching too wide */
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 25px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.hint {
+    font-size: 13px;
+    color: #888;
+    margin-top: 8px;
+    text-align: left;
+    font-family: 'Roboto Mono', monospace;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #FF6E00;
+    resize: none;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
+
+textarea::placeholder {
+    color: #555;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #111;
+    border: 2px solid #FF6E00;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #333;
+    font-family: 'Roboto Mono', monospace;
+}
+
+th {
+    background-color: #000;
+    color: #FF6E00;
+    font-family: 'Bolt', sans-serif;
+    text-transform: uppercase;
+}
+
+.button-container {
+    text-align: center;
+    margin: 30px;
+}
+
+.red {
+    background-color: #7a0000;
+    color: white;
+}
+
+.blue {
+    background-color: #002b7a;
+    color: white;
+}

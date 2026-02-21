@@ -1,152 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <meta charset="UTF-8">
 <title>Match {{ match.num }}</title>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 40px;
-        padding-bottom: 80px; /* space for ticker */
-    }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #currentAlliances {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    #timer {
-        font-size: 60px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #controls {
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    button {
-        padding: 12px 30px;
-        font-size: 16px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        margin: 0 8px;
-    }
-
-    #startButton { background-color: #4CAF50; color: white; }
-    #pauseButton { background-color: #f12525; color: white; display: none; }
-    #replayButton { background-color: #ff6e00; color: white; display: none; }
-
-    form {
-        width: 80%;
-        margin: 0 auto;
-        display: none;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-
-    .alliance {
-        width: 45%;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .red { background-color: #ffcccc; }
-    .blue { background-color: #cce0ff; }
-
-    .alliance h2 {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    .teams {
-        text-align: center;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    .inputs {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .inputs input {
-        width: 60px;
-        padding: 4px;
-        font-size: 16px;
-    }
-
-    /* Submit button styling */
-    .submit-btn {
-        width: 100%;
-        text-align: center;
-        margin-top: 30px;
-    }
-
-    .submit-btn button {
-        background-color: #4CAF50;
-        color: white;
-        font-size: 20px;
-        padding: 14px 40px;
-        border-radius: 8px;
-    }
-
-    .submit-btn button:hover {
-        background-color: #45a049;
-    }
-
-    /* Bottom ticker */
-    #bottomTicker {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #222;
-        color: white;
-        overflow: hidden;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        z-index: 1000;
-    }
-
-    #tickerContent {
-        white-space: nowrap;
-        display: inline-block;
-        animation: scrollTicker 25s linear infinite;
-        padding-left: 100%;
-    }
-
-    .ticker-item {
-        margin-right: 60px;
-        font-weight: bold;
-    }
-
-    .ticker-red { color: #ff6b6b; }
-    .ticker-blue { color: #6fa8ff; }
-
-    @keyframes scrollTicker {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100%); }
-    }
-</style>
 </head>
 
 <body>
-
-<h1>Match {{ match.num }}</h1>
+<div class="match-header">
+    <img src="{{ url_for('static', filename='images/runLeft.png') }}" class="small-logo" alt="Swartdogs Logo">
+    <h1>Match {{ match.num }}</h1>
+    <img src="{{ url_for('static', filename='images/runRight.png') }}" class="small-logo" alt="Swartdogs Logo">
+</div>
 
 <div id="currentAlliances">
     <h3 class="red">Red Alliance: {{ match["red"]|join(', ') }}</h3>
@@ -155,13 +25,13 @@
 
 <div id="timer">Ready</div>
 
-<div id="controls">
+<div id="controls" class="controls">
     <button id="startButton">Start Match</button>
     <button id="pauseButton">Pause</button>
     <button id="replayButton">Replay Match</button>
 </div>
 
-<form id="matchForm" method="post" action="{{ url_for('match') }}">
+<form id="matchForm" class="match-form" method="post" action="{{ url_for('match') }}">
     <div class="alliance red">
         <h2>Red Alliance</h2>
         <div class="teams">{{ match["red"]|join(', ') }}</div>
@@ -189,6 +59,7 @@
 
 <!-- Bottom running ticker -->
 <div id="bottomTicker">
+    <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="logo" class="ticker-logo">
     <div id="tickerContent">
         {% for m in next_matches %}
             <span class="ticker-item">

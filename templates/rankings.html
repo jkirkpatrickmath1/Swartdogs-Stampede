@@ -3,91 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Rankings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 40px;
-        }
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-        h1 {
-            text-align: center;
-        }
-
-        table {
-            width: 70%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-
-        th {
-            background-color: #333;
-            color: #fff;
-        }
-
-        .button-container {
-            text-align: center;
-            margin: 30px;
-        }
-
-        button {
-            padding: 12px 30px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-    /* Bottom ticker */
-    #bottomTicker {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #222;
-        color: white;
-        overflow: hidden;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        z-index: 1000;
-    }
-
-    #tickerContent {
-        white-space: nowrap;
-        display: inline-block;
-        animation: scrollTicker 25s linear infinite;
-        padding-left: 100%;
-    }
-
-    .ticker-item {
-        margin-right: 60px;
-        font-weight: bold;
-    }
-
-    .ticker-red { color: #ff6b6b; }
-    .ticker-blue { color: #6fa8ff; }
-
-    @keyframes scrollTicker {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100%); }
-    }
-
-    </style>
 </head>
 <body>
     <h1>Team Rankings</h1>
@@ -125,6 +44,7 @@
     
 <!-- Bottom running ticker -->
 <div id="bottomTicker">
+    <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="logo" class="ticker-logo">
     <div id="tickerContent">
         {% for m in next_matches %}
             <span class="ticker-item">
