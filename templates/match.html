@@ -218,33 +218,56 @@ let dingSound = document.getElementById("dingSound");
 let buzzerSound = document.getElementById("buzzerSound");
 let warningSound = document.getElementById("warningSound");
 
-let timeouts = [];
-let intervals = [];
-let paused = false;
+let matchLength = 44; // total seconds
+let elapsed = 0;
+let masterInterval = null;
+let gameState = "stopped";
 
-function clearAllTimers() {
-    timeouts.forEach(t => clearTimeout(t));
-    intervals.forEach(i => clearInterval(i));
-    timeouts = [];
-    intervals = [];
+function stopAllAudio() {
+    [chargeSound, dingSound, buzzerSound, warningSound].forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+    });
 }
 
-function countdown(seconds, label) {
-    let remaining = seconds;
-    timerDisplay.innerText = label + ": " + remaining;
+function updateMatch() {
+    if (gameState !== "running") return;
 
-    let interval = setInterval(() => {
-        if (!paused) {
-            remaining--;
-            timerDisplay.innerText = label + ": " + remaining;
-            if (remaining <= 0) clearInterval(interval);
-        }
-    }, 1000);
+    elapsed++;
 
-    intervals.push(interval);
+    // AUTO: 0–10
+    if (elapsed <= 10) {
+        timerDisplay.innerText = "AUTO: " + (10 - elapsed);
+    }
+
+    // TELEOP: 14–44 (30 sec)
+    if (elapsed === 10) buzzerSound.play();
+    if (elapsed === 12) {
+        dingSound.play();
+    }
+
+    if (elapsed >= 14 && elapsed <= 44) {
+        timerDisplay.innerText = "TELEOP: " + (44 - elapsed);
+    }
+
+    // Warning at 38 sec
+    if (elapsed === 38) {
+        warningSound.play();
+    }
+
+    // End
+    if (elapsed >= matchLength) {
+        buzzerSound.play();
+        timerDisplay.innerText = "MATCH OVER";
+        matchForm.style.display = "flex";
+        stopMatch();
+    }
 }
 
-startButton.addEventListener("click", () => {
+function startMatch() {
+    if (gameState === "running") return;
+
+    gameState = "running";
     chargeSound.currentTime = 0;
     chargeSound.play();
 
@@ -254,42 +277,45 @@ startButton.addEventListener("click", () => {
     pauseButton.style.display = "inline-block";
     replayButton.style.display = "inline-block";
 
-    paused = false;
-    clearAllTimers();
+    masterInterval = setInterval(updateMatch, 1000);
+}
 
-    timeouts.push(setTimeout(() => countdown(10, "AUTO"), 2000));
-    timeouts.push(setTimeout(() => buzzerSound.play(), 12000));
-    timeouts.push(setTimeout(() => { dingSound.play(); countdown(30, "TELEOP"); }, 14000));
-    timeouts.push(setTimeout(() => warningSound.play(), 33000));
+function pauseMatch() {
+    if (gameState === "running") {
+        gameState = "paused";
+        stopAllAudio();
+        pauseButton.textContent = "Resume";
+    } else if (gameState === "paused") {
+        gameState = "running";
+        pauseButton.textContent = "Pause";
+    }
+}
 
-    timeouts.push(setTimeout(() => {
-        buzzerSound.play();
-        timerDisplay.innerText = "MATCH OVER";
-        matchForm.style.display = "flex";
-        clearAllTimers();
-    }, 44000));
-});
+function stopMatch() {
+    gameState = "stopped";
+    clearInterval(masterInterval);
+    masterInterval = null;
+}
 
-pauseButton.addEventListener("click", () => {
-    paused = !paused;
-    pauseButton.textContent = paused ? "Resume" : "Pause";
-});
+function resetMatch() {
+    stopMatch();
+    stopAllAudio();
 
-replayButton.addEventListener("click", () => {
-    clearAllTimers();
-    paused = false;
-
+    elapsed = 0;
     timerDisplay.innerText = "Ready";
-    pauseButton.textContent = "Pause";
+    matchForm.style.display = "none";
 
     startButton.disabled = false;
     startButton.style.backgroundColor = "#4CAF50";
 
     pauseButton.style.display = "none";
     replayButton.style.display = "none";
+    pauseButton.textContent = "Pause";
+}
 
-    matchForm.style.display = "none";
-});
+startButton.addEventListener("click", startMatch);
+pauseButton.addEventListener("click", pauseMatch);
+replayButton.addEventListener("click", resetMatch);
 </script>
 
 </body>
