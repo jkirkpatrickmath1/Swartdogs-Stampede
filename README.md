@@ -46,3 +46,4 @@ This project allows you to simulate matches, track alliances, score matches, and
 - **Ticker**: Shows upcoming matches with team alliances  
 
 ---
+<a href="stampede.525swartdogs.org">Swartdogs Stampede</a> © 2026 by <a href="https://example.com">525 Swartdogs</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
